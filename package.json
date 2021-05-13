@@ -1,15 +1,46 @@
 {
-  "name": "demo",
+  "name": "neo-voting",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
   },
   "dependencies": {
+    "@cityofzion/neon-js": "^5.0.0-next.10",
+    "@simpli/serialized-request": "^1.0.5",
+    "class-transformer": "^0.4.0",
     "next": "10.2.0",
+    "qs": "^6.10.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-loading-skeleton": "^2.2.0",
+    "react-toast-notifications": "^2.4.4",
+    "sass": "^1.32.13",
+    "swr": "^0.5.6"
+  },
+  "devDependencies": {
+    "@types/qs": "^6.9.6",
+    "@types/react": "^17.0.5",
+    "@typescript-eslint/eslint-plugin": "^4.23.0",
+    "@typescript-eslint/parser": "^4.23.0",
+    "autoprefixer": "^10.2.5",
+    "eslint": "^7.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.23.2",
+    "husky": "^6.0.0",
+    "postcss": "^8.2.15",
+    "prettier": "^2.3.0",
+    "pretty-quick": "^3.1.0",
+    "tailwindcss": "^2.1.2",
+    "typescript": "^4.2.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged && npm run lint"
+    }
   }
 }
