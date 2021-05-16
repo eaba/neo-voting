@@ -2,12 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "components/effect";
+@import "components/modal";
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+  @apply transition bg-pal-white dark:bg-pal-darkest;
 }
 
 a {
@@ -17,4 +22,43 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.bg {
+  @apply transition bg-pal-white dark:bg-pal-darkest;
+}
+
+.typo {
+  @apply transition text-pal-black dark:text-pal-white;
+}
+
+.btn {
+  @apply transition py-1 px-4 rounded shadow-md select-none bg-pal-darker dark:bg-pal-lighter dark:hover:bg-pal-primary text-pal-white dark:text-pal-darkest hover:bg-pal-primary;
+  outline: none !important;
+
+  &--icon {
+    @apply rounded-full h-10 w-10 p-1;
+  }
+}
+
+.card {
+  @apply transition p-2 md:p-4 text-pal-black dark:text-pal-white bg-white dark:bg-pal-darker shadow-lg rounded-lg;
+
+  &--padding-sm {
+    @apply p-1 md:p-2;
+  }
+
+  &--padding-lg {
+    @apply p-4 md:p-8;
+  }
+}
+
+.modal {
+  .modal__frame {
+    @apply transition shadow-lg bg-pal-white dark:bg-pal-darker dark:text-pal-white;
+  }
+
+  .modal__bg {
+    @apply transition bg-opacity-25 bg-pal-primary dark:bg-pal-black dark:bg-opacity-25;
+  }
 }

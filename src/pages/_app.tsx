@@ -1,9 +1,11 @@
 import '~/styles/globals.scss'
+import '@fortawesome/fontawesome-free/css/all.css'
 
-import type {AppProps} from 'next/app'
 import React from 'react'
+import type {AppProps} from 'next/app'
 import {ToastProvider} from 'react-toast-notifications'
-import Setup from '~/pages/setup'
+import Setup from '~src/components/Setup'
+import {ModalComponent} from '~src/app/modal'
 
 function MyApp({Component, pageProps}: AppProps) {
   return (
@@ -14,6 +16,8 @@ function MyApp({Component, pageProps}: AppProps) {
     >
       <Setup>
         <Component {...pageProps} />
+
+        <ModalComponent name={'wc'} title={'Wallet Connect'} />
       </Setup>
     </ToastProvider>
   )

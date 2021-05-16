@@ -2,7 +2,7 @@
 
 import {NextApiRequest, NextApiResponse} from 'next'
 import * as Neon from '@cityofzion/neon-js'
-import {Env} from '~/Env'
+import {Env} from '~src/app/Env'
 
 export default async (req: NextApiRequest, res: NextApiResponse<number>) => {
   const {method} = req

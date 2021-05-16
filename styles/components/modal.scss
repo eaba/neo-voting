@@ -1,0 +1,126 @@
+$modal-default-width: 500px !default;
+$modal-default-width-tablet: 400px !default;
+
+$modal-small-width: 300px !default;
+$modal-small-width-tablet: 300px !default;
+
+$modal-large-width: 700px !default;
+$modal-large-width-tablet: 500px !default;
+
+$modal-backdrop: rgba(0, 0, 0, 0.4) !default;
+$modal-radius: 6px !default;
+$modal-padding-base: 8px !default;
+$modal-depth: 100 !default;
+$modal-shadow: 0 9px 30px 0 rgba(0, 0, 0, 0.4) !default;
+
+$modal-display-small: 576px !default;
+$modal-display-medium: 768px !default;
+$modal-display-large: 992px !default;
+$modal-display-extra-large: 1200px !default;
+
+.modal {
+  .modal__scroll {
+    overflow-y: auto;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    z-index: $modal-depth + 1;
+  }
+
+  .modal__view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $modal-padding-base;
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+  }
+
+  .modal__frame {
+    position: relative;
+    max-width: 100%;
+    width: $modal-default-width;
+    border-radius: $modal-radius;
+    box-shadow: $modal-shadow;
+    background: white;
+
+    @media screen and (max-width: $modal-display-medium) {
+      width: $modal-default-width-tablet;
+    }
+
+    @media screen and (max-width: $modal-display-small) {
+      width: 100%;
+    }
+
+    &.large {
+      width: $modal-large-width;
+
+      @media screen and (max-width: $modal-display-medium) {
+        width: $modal-large-width-tablet;
+      }
+    }
+
+    &.small {
+      width: $modal-small-width;
+
+      @media screen and (max-width: $modal-display-medium) {
+        width: $modal-small-width-tablet;
+      }
+    }
+
+    &.full {
+      width: 100%;
+    }
+  }
+
+  .modal__header {
+    display: flex;
+    justify-content: center;
+    padding: $modal-padding-base;
+    border-radius: $modal-radius $modal-radius 0 0;
+  }
+
+  .modal__title {
+    flex: 1;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: default;
+    user-select: none;
+  }
+
+  .modal__close-icon {
+    flex: 0;
+    text-decoration: none;
+    font-size: 21px;
+    line-height: 16px;
+    margin: auto;
+    transition: opacity ease-out 0.4s;
+    opacity: 0.6;
+    &:before {
+      content: '×';
+    }
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  .modal__body {
+    padding: $modal-padding-base;
+  }
+
+  .modal__bg {
+    background: $modal-backdrop;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    min-height: 100vh;
+    backdrop-filter: blur(20px);
+    z-index: $modal-depth;
+  }
+}

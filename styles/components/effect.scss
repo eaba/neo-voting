@@ -1,0 +1,47 @@
+:root {
+  --timeout: 400ms;
+}
+
+.fade-enter, .fade-appear {
+  transition: all var(--timeout);
+  opacity: 0;
+}
+
+.fade-enter-active, .fade-appear-active {
+  transition: all var(--timeout);
+  opacity: 1;
+}
+
+.fade-exit {
+  transition: all var(--timeout);
+  opacity: 1;
+}
+
+.fade-exit-active {
+  transition: all var(--timeout);
+  opacity: 0;
+}
+
+.fade-blur-enter, .fade-blur-appear {
+  transition: all var(--timeout);
+  filter: blur(20px);
+  opacity: 0;
+}
+
+.fade-blur-enter-active, .fade-blur-appear-active {
+  transition: all var(--timeout);
+  filter: blur(0);
+  opacity: 1;
+}
+
+.fade-blur-exit {
+  transition: all var(--timeout);
+  filter: blur(0);
+  opacity: 1;
+}
+
+.fade-blur-exit-active {
+  transition: all var(--timeout);
+  filter: blur(20px);
+  opacity: 0;
+}
