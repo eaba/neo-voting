@@ -12,7 +12,7 @@ interface Props {
   modalInstance?: ModalWrapper
   onOpen?: (payload?: any) => void
   onClose?: () => void
-  children?: React.ReactElement | React.ReactElement[]
+  children?: React.ReactElement | React.ReactElement[] | string
 }
 
 function ModalComponent(
