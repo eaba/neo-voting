@@ -30,7 +30,4 @@ export class AppConfig {
 
   readonly DEFAULT_GASTOKEN_SCRIPTHASH =
     '0xd2a4cff31913016155e38e474a2c06d08be276cf'
-
-  readonly DEFAULT_TRANSFER_DESTINATION_ACCOUNT =
-    'NRnvbghHXdJkcMx9BHPqFeSjjGu4UriJ8Z'
 }

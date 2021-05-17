@@ -33,7 +33,7 @@ a {
 }
 
 .btn {
-  @apply transition py-1 px-4 rounded shadow-md select-none bg-pal-darker dark:bg-pal-lighter dark:hover:bg-pal-primary text-pal-white dark:text-pal-darkest hover:bg-pal-primary;
+  @apply transition py-1 px-4 rounded shadow-md select-none bg-pal-darker dark:bg-pal-lighter dark:hover:bg-pal-primary text-pal-white dark:text-pal-darkest hover:bg-pal-primary focus:ring;
   outline: none !important;
 
   &--icon {
@@ -43,6 +43,10 @@ a {
   &--danger {
     @apply bg-red-500 dark:bg-red-500 hover:bg-red-600 dark:hover:bg-red-600 text-pal-white dark:text-pal-white;
   }
+}
+
+.input {
+  @apply transition shadow-inner h-8 px-2 text-sm rounded dark:text-pal-white bg-pal-white dark:bg-pal-darkest focus:outline-none focus:ring;
 }
 
 .card {

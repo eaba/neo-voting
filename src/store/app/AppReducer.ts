@@ -10,6 +10,10 @@ export class AppReducer extends ReducerWrapper<AppType, AppState, AppAction> {
 
   protected readonly dispatchers = [LanguageDispatcher, IsDarkDispatcher]
 
+  readonly getters = (state: RootState) => ({
+    app: state.app,
+  })
+
   readonly actions = {
     setLanguage: (language: string) => {
       return this.commit('SET_LANGUAGE', {language})

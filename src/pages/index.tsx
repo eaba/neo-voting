@@ -1,36 +1,13 @@
 import Head from 'next/head'
-import React, {useState} from 'react'
-import type {HelloResponse} from '~src/pages/api/hello'
-import {Request} from '@simpli/serialized-request'
-import {Await, AwaitActivity} from '~src/app/await'
+import React from 'react'
 import Navbar from '~src/components/Navbar'
-import {AxiosResponse} from 'axios'
+import CardHelloWorld from '~src/components/cards/CardHelloWorld'
+import CardQuickSendGas from '~src/components/cards/CardQuickSendGas'
+import {useSelector} from 'react-redux'
+import {RootStore} from '~src/store/RootStore'
 
 export default function Home() {
-  const [value, setValue] = useState<string>()
-  const [height, setHeight] = useState<number>()
-
-  async function clickAction() {
-    try {
-      const promises: Promise<AxiosResponse>[] = [
-        Request.post('/api/hello')
-          .name('hello')
-          .as<HelloResponse>()
-          .delay(5000)
-          .fetchResponse(),
-        Request.get('/api/height')
-          .name('height')
-          .asNumber()
-          .delay(3000)
-          .fetchResponse(),
-      ]
-
-      const response = await Await.run('populate', () => Promise.all(promises))
-
-      setValue(response[0].data.value)
-      setHeight(response[1].data)
-    } catch {}
-  }
+  const {isConnected} = useSelector(RootStore.auth.getters)
 
   return (
     <>
@@ -44,17 +21,14 @@ export default function Home() {
         </Head>
 
         <main className={'container flex flex-col items-center'}>
-          <div className={'card card--padding-lg'}>
-            <h1 className={'mb-4 text-5xl'}>Hello world</h1>
+          <div className={'w-96'}>
+            <div>
+              <CardQuickSendGas />
+            </div>
 
-            <AwaitActivity name={'populate'}>
-              <button className={'mb-4 btn'} onClick={clickAction}>
-                Click me
-              </button>
-
-              <div className={'text-sm'}>Value: {value}</div>
-              <div className={'text-sm'}>Height: {height}</div>
-            </AwaitActivity>
+            <div>
+              <CardHelloWorld />
+            </div>
           </div>
         </main>
       </div>

@@ -7,6 +7,7 @@ import {Env} from '~src/app/Env'
 import {Config} from '~src/app/Config'
 import {useDispatch} from 'react-redux'
 import {RootStore} from '~src/store/RootStore'
+import PropTypes from 'prop-types'
 
 export type Props = {
   children?: React.ReactElement | React.ReactElement[]
@@ -42,6 +43,13 @@ function Setup(props: Props) {
   }, [])
 
   return <>{props.children}</>
+}
+
+Setup.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element.isRequired),
+  ]),
 }
 
 export default Setup

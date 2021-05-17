@@ -9,6 +9,7 @@ export declare global {
     | 'DISCONNECT'
     | 'SET_CLIENT'
     | 'SET_SESSION'
+    | 'SET_GAS_BALANCE'
     | 'SET_URI'
     | 'SET_PAIRINGS'
     | 'SET_ACCOUNTS'
@@ -16,6 +17,7 @@ export declare global {
   interface AuthState {
     client: Client | null
     session: SessionTypes.Settled | null
+    gasBalance: number | null
     uri: string | null
     pairings: string[] | null
     accounts: string[] | null

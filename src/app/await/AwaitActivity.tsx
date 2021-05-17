@@ -34,11 +34,6 @@ function AwaitActivity(
   useEffect(() => {
     setAwait(props.awaitInstance ?? defaultAwaitInstance)
 
-    if (ref.current) {
-      setMinHeight(ref.current.clientHeight)
-      setMinWidth(ref.current.clientWidth)
-    }
-
     const toggleEvent = (
       name?: string,
       newState: AwaitState = AwaitState.DEFAULT
@@ -76,6 +71,13 @@ function AwaitActivity(
     }
   }, [props])
 
+  useEffect(() => {
+    if (ref.current) {
+      setMinHeight(ref.current.clientHeight)
+      setMinWidth(ref.current.clientWidth)
+    }
+  }, [state])
+
   const activityProps: Props = {...props}
   delete activityProps.awaitInstance
   delete activityProps.onLoadingStart
@@ -95,7 +97,7 @@ function AwaitActivity(
         unmountOnExit
         appear
       >
-        <>
+        <div ref={ref} {...activityProps}>
           {state === AwaitState.LOADING && (
             <div
               style={{
@@ -112,22 +114,16 @@ function AwaitActivity(
             </div>
           )}
 
-          {state === AwaitState.ERROR && (
-            <div ref={ref} {...activityProps}>
-              {props.errorView ??
-                props.defaultView ??
-                (props.children as React.ReactElement) ?? <div />}
-            </div>
-          )}
+          {state === AwaitState.ERROR &&
+            (props.errorView ??
+              props.defaultView ??
+              (props.children as React.ReactElement) ?? <div />)}
 
-          {state === AwaitState.DEFAULT && (
-            <div ref={ref} {...activityProps}>
-              {props.defaultView ?? (props.children as React.ReactElement) ?? (
-                <div />
-              )}
-            </div>
-          )}
-        </>
+          {state === AwaitState.DEFAULT &&
+            (props.defaultView ?? (props.children as React.ReactElement) ?? (
+              <div />
+            ))}
+        </div>
       </CSSTransition>
     </SwitchTransition>
   )
