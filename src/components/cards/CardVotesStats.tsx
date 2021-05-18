@@ -3,11 +3,10 @@ import {useSelector} from 'react-redux'
 import ReactECharts from 'echarts-for-react'
 import {RootStore} from '~src/store/RootStore'
 import {Await, AwaitActivity} from '~src/app/await'
-import TableRegisteredCandidateStats from '~src/components/tables/TableRegisteredCandidateStats'
-import {RegisteredCandidateStats} from '~src/models/RegisteredCandidateStats'
 import {EChartOptions} from '~src/app/EChartOptions'
+import {VotesStats} from '~src/models/VotesStats'
 
-function CardRegisteredCandidateStats(
+function CardVotesStats(
   props: React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLDivElement>,
     HTMLDivElement
@@ -15,11 +14,11 @@ function CardRegisteredCandidateStats(
 ) {
   const {app} = useSelector(RootStore.app.getters)
 
-  const [model, setModel] = useState<RegisteredCandidateStats>()
+  const [model, setModel] = useState<VotesStats>()
   const [options, setOptions] = useState<EChartOptions>(new EChartOptions())
 
   async function populate() {
-    const model = new RegisteredCandidateStats()
+    const model = new VotesStats()
 
     try {
       await model.populate()
@@ -31,28 +30,43 @@ function CardRegisteredCandidateStats(
     populateChart(model)
   }
 
-  function populateChart(model: RegisteredCandidateStats) {
+  function populateChart(model: VotesStats) {
     const options = new EChartOptions(app.isDark)
-    options.xAxis.data = model.candidateCount ?? []
+    options.xAxis.data = model.voteCount ?? []
     options.tooltip.formatter =
-      'Block Index: <b>{b0}</b><br/>Count: <b>{c0}</b>'
-    options.series = {
-      name: 'Block Index',
-      type: 'line',
-      smooth: true,
-      showSymbol: false,
-      lineStyle: {},
-      areaStyle: {
-        opacity: 0.7,
+      'Block Index: <b>{b0}</b><br/>Vote Count: <b>{c0}</b><br /><span style="color: orangered">Treshhold: <b>{c1}</b></span>'
+    options.series = [
+      {
+        name: 'Block Index',
+        type: 'line',
+        smooth: true,
+        showSymbol: false,
+        lineStyle: {},
+        areaStyle: {
+          opacity: 0.7,
+        },
+        data: model.blockIndex ?? [],
       },
-      data: model.blockIndex ?? [],
-    }
+      {
+        name: 'Treshhold',
+        type: 'line',
+        smooth: true,
+        showSymbol: false,
+        lineStyle: {
+          color: 'orangered',
+        },
+        areaStyle: {
+          opacity: 0,
+        },
+        data: model.blockIndex.map(() => model.treshhold) ?? [],
+      },
+    ]
 
     setOptions(options)
   }
 
   useEffect(() => {
-    Await.run('populateCardRegisteredCandidateStats', populate)
+    Await.run('populateCardVotesStats', populate)
   }, [])
 
   useEffect(() => {
@@ -63,21 +77,17 @@ function CardRegisteredCandidateStats(
 
   return (
     <div {...props}>
-      <div className={'card card--square'}>
-        <div className={'mb-2 title'}>Registered Candidates</div>
+      <div className={'card'}>
+        <div className={'mb-2 title'}>Total Votes</div>
 
         {model && (
-          <AwaitActivity name={'populateCardRegisteredCandidateStats'}>
+          <AwaitActivity name={'populateCardVotesStats'}>
             <ReactECharts
               option={options}
               theme={app.isDark ? 'dark' : undefined}
               notMerge={true}
               lazyUpdate={true}
             />
-
-            <div className={'-mx-2 md:-mx-4 mb-4'}>
-              <TableRegisteredCandidateStats model={model} />
-            </div>
           </AwaitActivity>
         )}
       </div>
@@ -85,4 +95,4 @@ function CardRegisteredCandidateStats(
   )
 }
 
-export default CardRegisteredCandidateStats
+export default CardVotesStats

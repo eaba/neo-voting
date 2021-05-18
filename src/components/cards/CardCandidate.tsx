@@ -20,7 +20,9 @@ function CardCandidate(
 
       try {
         await candidate.populate()
-      } catch {}
+      } catch {
+        return
+      }
 
       setModel(candidate)
     }

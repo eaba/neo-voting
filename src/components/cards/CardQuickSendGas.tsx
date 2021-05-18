@@ -68,26 +68,24 @@ function CardQuickSendGas(
             <>
               {state === State.FORM && (
                 <>
-                  <div className={'mb-2'}>
+                  <div className={'md:flex md:flex-row'}>
                     <input
                       type="text"
-                      className={'input w-full'}
+                      className={'mb-2 md:mb-0 md:mr-2 input w-full md:flex-1'}
                       placeholder={'Address'}
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                     />
-                  </div>
 
-                  <div className={'flex'}>
                     <input
                       type="number"
-                      className={'mr-2 input flex-1'}
+                      className={'mb-2 md:mb-0 md:mr-2 input w-full md:flex-1'}
                       placeholder={'GAS'}
                       value={gasAmount}
                       onChange={(e) => setGasAmount(Number(e.target.value))}
                     />
 
-                    <div className={'w-28'}>
+                    <div className={'w-full md:w-28'}>
                       <TransitionShow if={!!(address && (gasAmount ?? 0) > 0)}>
                         <button
                           onClick={() => Await.run('sendGas', sendGas)}

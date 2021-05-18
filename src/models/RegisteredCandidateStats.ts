@@ -19,7 +19,7 @@ export class RegisteredCandidateStats {
   candidates: Candidate[] = []
 
   async populate() {
-    await Request.get(`http://127.0.0.1:5000/registered_candidates`)
+    return await Request.get(`http://127.0.0.1:5000/registered_candidates`)
       .name('populateRegisteredCandidateStats')
       .as(this)
       .fetchData()

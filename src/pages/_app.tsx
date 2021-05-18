@@ -3,7 +3,10 @@ import '@fortawesome/fontawesome-free/css/all.css'
 
 import 'reflect-metadata'
 
+import '~/src/vendor/dark'
+
 import React from 'react'
+import Head from 'next/head'
 import {applyMiddleware, createStore} from 'redux'
 import {Provider} from 'react-redux'
 import thunk from 'redux-thunk'
@@ -21,6 +24,13 @@ const store = createStore(RootStore.reducers, {}, applyMiddleware(thunk))
 function MyApp({Component, pageProps}: AppProps) {
   return (
     <Provider store={store}>
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </Head>
+
       <ToastProvider
         autoDismiss
         autoDismissTimeout={6000}

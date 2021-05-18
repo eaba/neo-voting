@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import {RegisteredCandidateStats} from '~src/models/RegisteredCandidateStats'
 import ModalCandidate from '~src/components/modals/ModalCandidate'
@@ -51,7 +51,7 @@ function TableRegisteredCandidateStats(props: Props) {
 }
 
 TableRegisteredCandidateStats.propTypes = {
-  model: PropTypes.element.isRequired,
+  model: PropTypes.object.isRequired,
 }
 
 export default TableRegisteredCandidateStats
