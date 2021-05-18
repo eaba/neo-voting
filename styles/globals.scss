@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+
 @import "components/effect";
 @import "components/modal";
 
@@ -9,15 +11,15 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 
   @apply transition bg-pal-white dark:bg-pal-darkest;
 }
 
 a {
+  @apply transition cursor-pointer text-pal-darker hover:text-pal-primary dark:text-pal-white dark:hover:text-pal-primary;
   color: inherit;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 * {
@@ -30,6 +32,10 @@ a {
 
 .typo {
   @apply transition text-pal-black dark:text-pal-white;
+}
+
+.title {
+  @apply pb-2 text-lg font-medium text-pal-darker dark:text-pal-white border-b-2 border-pal-white dark:border-pal-darkest dark:border-opacity-25;
 }
 
 .btn {
@@ -46,11 +52,19 @@ a {
 }
 
 .input {
-  @apply transition shadow-inner h-8 px-2 text-sm rounded dark:text-pal-white bg-pal-white dark:bg-pal-darkest focus:outline-none focus:ring;
+  @apply transition h-10 px-2 text-sm shadow-inner rounded-md border border-gray-200 dark:border-pal-darkest dark:border-opacity-50 focus:border-pal-primary dark:text-pal-white dark:focus:border-pal-primary bg-pal-white bg-opacity-50 dark:bg-pal-darkest dark:bg-opacity-50 focus:outline-none focus:ring focus:ring-pal-primary;
 }
 
 .card {
   @apply transition p-2 md:p-4 text-pal-black dark:text-pal-white bg-white dark:bg-pal-darker shadow-lg rounded-lg;
+
+  &--mobile-square {
+    @apply rounded-none sm:rounded-lg;
+  }
+
+  &--square {
+    @apply rounded-none;
+  }
 
   &--padding-sm {
     @apply p-1 md:p-2;
@@ -63,10 +77,39 @@ a {
 
 .modal {
   .modal__frame {
-    @apply transition shadow-lg bg-pal-white dark:bg-pal-darker dark:text-pal-white;
+    @apply transition shadow-lg bg-white dark:bg-pal-darker dark:text-pal-white;
   }
 
   .modal__bg {
-    @apply transition bg-opacity-25 bg-pal-primary dark:bg-pal-black dark:bg-opacity-25;
+    @apply transition bg-opacity-25 bg-pal-darker dark:bg-pal-black dark:bg-opacity-25;
+  }
+}
+
+.custom-table {
+  @apply overflow-x-auto;
+
+  table {
+    @apply min-w-full;
+
+    thead {
+      @apply transition shadow bg-white dark:bg-pal-darker;
+
+      tr {
+        th {
+          @apply transition px-6 py-3 text-left text-xs font-medium text-pal-darker dark:text-pal-white uppercase tracking-wider;
+        }
+      }
+    }
+
+    tbody {
+      @apply transition bg-pal-white bg-opacity-50 dark:bg-pal-darkest dark:bg-opacity-50;
+
+      tr {
+        td {
+          @apply px-6 py-4 text-sm whitespace-nowrap;
+          @apply border-b border-gray-200 dark:border-pal-darkest dark:border-opacity-50;
+        }
+      }
+    }
   }
 }

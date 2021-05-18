@@ -1,4 +1,4 @@
-import {EventBus} from '../EventBus'
+import {EventBus} from '@simpli/web-bus'
 
 export class ModalWrapper {
   readonly event = new EventBus()

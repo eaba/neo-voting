@@ -12,7 +12,12 @@ export enum State {
   SENT,
 }
 
-function CardQuickSendGas() {
+function CardQuickSendGas(
+  props: React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLDivElement>,
+    HTMLDivElement
+  >
+) {
   const dispatch = useDispatch()
   const dispatchAsyncString = useDispatch<AsyncDispatch<string>>()
 
@@ -54,71 +59,73 @@ function CardQuickSendGas() {
   }
 
   return (
-    <div className={'mb-4 card'}>
-      <div className={'mb-2 text-xl font-bold'}>Quick send GAS</div>
+    <div {...props}>
+      <div className={'card'}>
+        <div className={'mb-4 title'}>Quick send GAS</div>
 
-      <TransitionSwitcher state={state}>
-        <AwaitActivity name={'sendGas'}>
-          <>
-            {state === State.FORM && (
-              <>
-                <div className={'mb-2'}>
-                  <input
-                    type="text"
-                    className={'input w-full'}
-                    placeholder={'Address'}
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                  />
-                </div>
-
-                <div className={'flex'}>
-                  <input
-                    type="number"
-                    className={'mr-2 input flex-1'}
-                    placeholder={'GAS'}
-                    value={gasAmount}
-                    onChange={(e) => setGasAmount(Number(e.target.value))}
-                  />
-
-                  <div className={'w-28'}>
-                    <TransitionShow if={!!(address && (gasAmount ?? 0) > 0)}>
-                      <button
-                        onClick={() => Await.run('sendGas', sendGas)}
-                        className={'btn w-full'}
-                      >
-                        Send GAS
-                      </button>
-                    </TransitionShow>
+        <TransitionSwitcher state={state}>
+          <AwaitActivity name={'sendGas'}>
+            <>
+              {state === State.FORM && (
+                <>
+                  <div className={'mb-2'}>
+                    <input
+                      type="text"
+                      className={'input w-full'}
+                      placeholder={'Address'}
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                    />
                   </div>
-                </div>
-              </>
-            )}
 
-            {state === State.SENT && (
-              <div className={'w-full'}>
-                <div>GAS sent</div>
+                  <div className={'flex'}>
+                    <input
+                      type="number"
+                      className={'mr-2 input flex-1'}
+                      placeholder={'GAS'}
+                      value={gasAmount}
+                      onChange={(e) => setGasAmount(Number(e.target.value))}
+                    />
 
-                <div className={'mb-4'}>
-                  <div className={'mb-2'}>Transaction ID:</div>
-
-                  <div
-                    className={
-                      'overflow-x-auto rounded px-2 py-6 shadow-inner text-xs text-pal-black dark:text-pal-white bg-pal-white dark:bg-pal-darkest'
-                    }
-                  >
-                    {txid}
+                    <div className={'w-28'}>
+                      <TransitionShow if={!!(address && (gasAmount ?? 0) > 0)}>
+                        <button
+                          onClick={() => Await.run('sendGas', sendGas)}
+                          className={'btn w-full h-full'}
+                        >
+                          Send GAS
+                        </button>
+                      </TransitionShow>
+                    </div>
                   </div>
-                </div>
+                </>
+              )}
 
-                <button onClick={resetState} className={'btn'}>
-                  Back
-                </button>
-              </div>
-            )}
-          </>
-        </AwaitActivity>
-      </TransitionSwitcher>
+              {state === State.SENT && (
+                <div className={'w-full'}>
+                  <div>GAS sent</div>
+
+                  <div className={'mb-4'}>
+                    <div className={'mb-2'}>Transaction ID:</div>
+
+                    <div
+                      className={
+                        'overflow-x-auto rounded px-2 py-6 shadow-inner text-xs text-pal-black dark:text-pal-white bg-pal-white dark:bg-pal-darkest'
+                      }
+                    >
+                      {txid}
+                    </div>
+                  </div>
+
+                  <button onClick={resetState} className={'btn'}>
+                    Back
+                  </button>
+                </div>
+              )}
+            </>
+          </AwaitActivity>
+        </TransitionSwitcher>
+      </div>
     </div>
   )
 }

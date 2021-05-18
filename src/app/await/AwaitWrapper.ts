@@ -1,5 +1,5 @@
 import React from 'react'
-import {EventBus} from '../EventBus'
+import {EventBus} from '@simpli/web-bus'
 
 export enum AwaitState {
   DEFAULT,

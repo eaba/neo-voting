@@ -1,6 +1,8 @@
 import '~/styles/globals.scss'
 import '@fortawesome/fontawesome-free/css/all.css'
 
+import 'reflect-metadata'
+
 import React from 'react'
 import {applyMiddleware, createStore} from 'redux'
 import {Provider} from 'react-redux'

@@ -38,6 +38,7 @@ export class AuthReducer extends ReducerWrapper<
 
   readonly getters = (state: RootState) => ({
     auth: state.auth,
+    publicKey: state.auth.session?.self.publicKey,
     isConnected: Boolean(state.auth.session),
   })
 

@@ -13,15 +13,10 @@ interface Props {
   onOpen?: (payload?: any) => void
   onClose?: () => void
   children?: React.ReactElement | React.ReactElement[] | string
+  innerClass?: string
 }
 
-function ModalComponent(
-  props: Props &
-    React.DetailedHTMLProps<
-      React.HTMLAttributes<HTMLDivElement>,
-      HTMLDivElement
-    >
-) {
+function ModalComponent(props: Props) {
   const ref = useRef<React.DetailedHTMLProps<any, any>>(null)
   const [isOpen, setOpen] = useState<boolean>(false)
   const [bodyOverflowY, setBodyOverflowY] = useState<string>()
@@ -50,8 +45,11 @@ function ModalComponent(
   }
 
   useEffect(() => {
-    setModal(props.modalInstance ?? defaultModalInstance)
     setBodyOverflowY(document.body.style.overflowY)
+  }, [])
+
+  useEffect(() => {
+    setModal(props.modalInstance ?? defaultModalInstance)
 
     const openEvent = (name: string, payload?: any) => {
       if (name === props.name) {
@@ -93,7 +91,7 @@ function ModalComponent(
       >
         <div className={'modal__scroll'}>
           <div ref={ref} className={'modal__view'} onClick={closeFromView}>
-            <div className={'modal__frame'}>
+            <div className={`modal__frame ${props.innerClass}`}>
               <div className={'modal__header'}>
                 <div className={'modal__title'}>{props.title}</div>
 
@@ -135,6 +133,7 @@ ModalComponent.propTypes = {
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element.isRequired),
   ]),
+  innerClass: PropTypes.string,
 }
 
 export default ModalComponent
