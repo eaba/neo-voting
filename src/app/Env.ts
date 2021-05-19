@@ -1,6 +1,11 @@
 export abstract class Env {
   static readonly NODE_URL = process.env.NEXT_PUBLIC_NODE_URL ?? ''
 
+  static readonly API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
+
+  static readonly DEFAULT_CHAIN_ID =
+    process.env.NEXT_PUBLIC_DEFAULT_CHAIN_ID ?? ''
+
   static readonly HELLO_CONTRACT_HASH =
     process.env.NEXT_PUBLIC_HELLO_CONTRACT_HASH ?? ''
 

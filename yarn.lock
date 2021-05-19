@@ -573,10 +573,10 @@
   dependencies:
     "pino" "^6.7.0"
 
-"@simpli/redux-wrapper@^0.1.2":
-  "integrity" "sha512-Awi1rQ8FhPnmynlqLWOjI2TGbf6do/SQSfKrrMd+PTFVR8FKdzA8oOG/tfeKhXVRSxXia8z4DtGF0FQi3RmjYg=="
-  "resolved" "https://registry.npmjs.org/@simpli/redux-wrapper/-/redux-wrapper-0.1.2.tgz"
-  "version" "0.1.2"
+"@simpli/redux-wrapper@^0.2.0":
+  "integrity" "sha512-/EdkdayXcPAGHyFIOUnscg2quhEQZGYc3yhFoUDTRQFR3fHL4qFOa5wGQRGhtvi4LFbXxtN/lmeZBipr6LR4HQ=="
+  "resolved" "https://registry.npmjs.org/@simpli/redux-wrapper/-/redux-wrapper-0.2.0.tgz"
+  "version" "0.2.0"
 
 "@simpli/serialized-request@^1.0.7":
   "integrity" "sha512-hLPoUeZ3HqhC4ePy4H645XDEuDjBG61GC9ml8mmDZy6VilaE5OSr2oP/ZiMQC4vR4L0tmXmMnp3vzDADgS+bjQ=="

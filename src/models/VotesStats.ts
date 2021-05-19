@@ -1,4 +1,5 @@
 import {HttpExclude, HttpExpose, Request} from '@simpli/serialized-request'
+import {Env} from '~src/app/Env'
 
 @HttpExclude()
 export class VotesStats {
@@ -12,7 +13,7 @@ export class VotesStats {
   treshhold: number | null = null
 
   async populate() {
-    return await Request.get(`http://127.0.0.1:5000/votes`)
+    return await Request.get(`${Env.API_URL}/votes`)
       .name('populateVotesStats')
       .as(this)
       .fetchData()

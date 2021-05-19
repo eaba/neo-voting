@@ -5,6 +5,7 @@ import {
   ResponseSerialize,
 } from '@simpli/serialized-request'
 import {Candidate} from './Candidate'
+import {Env} from '~src/app/Env'
 
 @HttpExclude()
 export class RegisteredCandidateStats {
@@ -19,7 +20,7 @@ export class RegisteredCandidateStats {
   candidates: Candidate[] = []
 
   async populate() {
-    return await Request.get(`http://127.0.0.1:5000/registered_candidates`)
+    return await Request.get(`${Env.API_URL}/registered_candidates`)
       .name('populateRegisteredCandidateStats')
       .as(this)
       .fetchData()

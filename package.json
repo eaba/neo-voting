@@ -12,7 +12,7 @@
     "@cityofzion/neon-js": "^5.0.0-next.10",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@json-rpc-tools/utils": "^1.7.5",
-    "@simpli/redux-wrapper": "^0.1.2",
+    "@simpli/redux-wrapper": "^0.2.0",
     "@simpli/serialized-request": "^1.0.7",
     "@simpli/web-bus": "^1.0.0",
     "@walletconnect/client": "^2.0.0-alpha.42",

@@ -1,4 +1,5 @@
 import {HttpExclude, HttpExpose, Request} from '@simpli/serialized-request'
+import {Env} from '~src/app/Env'
 
 export interface CommitteeResponse {
   committee: Committee[]
@@ -39,16 +40,14 @@ export class Candidate {
   totalCandidates: number | null = null
 
   async populate() {
-    return await Request.get(
-      `http://127.0.0.1:5000/candidate/${this.publicKey}`
-    )
+    return await Request.get(`${Env.API_URL}/candidate/${this.publicKey}`)
       .name('populateCandidate')
       .as(this)
       .fetchData()
   }
 
   static async getCommittees() {
-    return await Request.get(`http://127.0.0.1:5000/committee`)
+    return await Request.get(`${Env.API_URL}/committee`)
       .name('getCommittees')
       .as<CommitteeResponse>()
       .fetchData()
