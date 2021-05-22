@@ -32,9 +32,9 @@ function CardVotesStats(
 
   function populateChart(model: VotesStats) {
     const options = new EChartOptions(app.isDark)
-    options.xAxis.data = model.voteCount ?? []
+    options.xAxis.data = model.blockIndex ?? []
     options.tooltip.formatter =
-      'Block Index: <b>{b0}</b><br/>Vote Count: <b>{c0}</b><br /><span style="color: orangered">Treshhold: <b>{c1}</b></span>'
+      'Block Index: <b>{b0}</b><br/>Vote Count: <b>{c0}</b><br /><span style="color: orangered">Threshold: <b>{c1}</b></span>'
     options.series = [
       {
         name: 'Block Index',
@@ -45,10 +45,10 @@ function CardVotesStats(
         areaStyle: {
           opacity: 0.7,
         },
-        data: model.blockIndex ?? [],
+        data: model.voteCount ?? [],
       },
       {
-        name: 'Treshhold',
+        name: 'Threshold',
         type: 'line',
         smooth: true,
         showSymbol: false,
@@ -58,7 +58,7 @@ function CardVotesStats(
         areaStyle: {
           opacity: 0,
         },
-        data: model.blockIndex.map(() => model.treshhold) ?? [],
+        data: model.blockIndex.map(() => model.threshold) ?? [],
       },
     ]
 

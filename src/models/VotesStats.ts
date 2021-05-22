@@ -10,7 +10,7 @@ export class VotesStats {
   voteCount: number[] = []
 
   @HttpExpose()
-  treshhold: number | null = null
+  threshold: number | null = null
 
   async populate() {
     return await Request.get(`${Env.API_URL}/votes`)
