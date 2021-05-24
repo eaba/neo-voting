@@ -34,6 +34,8 @@ export class EChartOptions {
     },
   }
 
+  plugins?: any
+
   series: any = []
 
   color: any = {

@@ -6,6 +6,7 @@ import {Await, AwaitActivity} from '~src/app/await'
 import {EChartOptions} from '~src/app/EChartOptions'
 import {Candidate, CommitteeResponse} from '~src/models/Candidate'
 import {Env} from '~src/app/Env'
+import {Modal} from '~src/app/modal'
 
 function CardCommittee(
   props: React.DetailedHTMLProps<
@@ -31,6 +32,10 @@ function CardCommittee(
     populateChart(model)
   }
 
+  function chartEvent(e: any) {
+    Modal.open('candidate', e.name)
+  }
+
   function populateChart(model: CommitteeResponse) {
     const options = new EChartOptions(app.isDark)
 
@@ -47,6 +52,7 @@ function CardCommittee(
     ]
 
     options.tooltip = {
+      formatter: 'Public Key: <b>{b0}</b><br/>Votes: <b>{c0}</b>',
       trigger: 'item',
     }
 
@@ -55,7 +61,18 @@ function CardCommittee(
         name: 'Committee',
         type: 'pie',
         label: {
+          formatter: '{per|{d}%}',
           color: app.isDark ? Env.PALETTE_WHITE : Env.PALETTE_BLACK,
+          rich: {
+            per: {
+              color: app.isDark ? Env.PALETTE_DARKEST : Env.PALETTE_WHITE,
+              backgroundColor: app.isDark
+                ? Env.PALETTE_PRIMARY
+                : Env.PALETTE_DARKER,
+              padding: [3, 4],
+              borderRadius: 4,
+            },
+          },
         },
         data:
           model.committee.map((it) => {
@@ -98,6 +115,9 @@ function CardCommittee(
               theme={app.isDark ? 'dark' : undefined}
               notMerge={true}
               lazyUpdate={true}
+              onEvents={{
+                click: chartEvent,
+              }}
             />
           </AwaitActivity>
         )}
