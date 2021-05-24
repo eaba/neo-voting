@@ -33,7 +33,7 @@ function CardRegisteredCandidateStats(
 
   function populateChart(model: RegisteredCandidateStats) {
     const options = new EChartOptions(app.isDark)
-    options.xAxis.data = model.candidateCount ?? []
+    options.xAxis.data = model.blockIndex ?? []
     options.tooltip.formatter =
       'Block Index: <b>{b0}</b><br/>Count: <b>{c0}</b>'
     options.series = {
@@ -45,7 +45,7 @@ function CardRegisteredCandidateStats(
       areaStyle: {
         opacity: 0.7,
       },
-      data: model.blockIndex ?? [],
+      data: model.candidateCount ?? [],
     }
 
     setOptions(options)

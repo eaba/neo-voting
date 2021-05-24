@@ -29,7 +29,7 @@ async def total_votes():
         y.append(y[-1] + randint(-15, 100))
 
     return {
-        "treshhold": 1_000,
+        "threshold": 1_000,
         "block_index": x,
         "vote_count": y
     }
