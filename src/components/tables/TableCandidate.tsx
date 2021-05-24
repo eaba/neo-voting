@@ -29,7 +29,7 @@ function TableCandidate(props: Props) {
           </tr>
           <tr>
             <td>Total Votes</td>
-            <td>{props.model?.totalCandidates}</td>
+            <td>{props.model?.votes}</td>
           </tr>
           <tr>
             <td>Unique Voters</td>
