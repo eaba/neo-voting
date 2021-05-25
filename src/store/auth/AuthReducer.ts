@@ -5,13 +5,14 @@ import QRCodeModal from '@walletconnect/qrcode-modal'
 import {ERROR, getAppMetadata, getError} from '@walletconnect/utils'
 import type {SessionTypes} from '@walletconnect/types'
 import {Client} from '@walletconnect/client/dist/cjs/client'
+import {Env} from '~src/app/Env'
+import {Config} from '~src/app/Config'
 import {ClientDispatcher} from '~src/store/auth/dispatchers/ClientDispatcher'
 import {SessionDispatcher} from '~src/store/auth/dispatchers/SessionDispatcher'
 import {GasBalanceDispatcher} from '~src/store/auth/dispatchers/GasBalanceDispatcher'
 import {UriDispatcher} from '~src/store/auth/dispatchers/UriDispatcher'
 import {PairingsDispatcher} from '~src/store/auth/dispatchers/PairingsDispatcher'
 import {AccountsDispatcher} from '~src/store/auth/dispatchers/AccountsDispatcher'
-import {Config} from '~src/app/Config'
 
 export class AuthReducer extends ReducerWrapper<
   AuthType,
@@ -195,7 +196,7 @@ export class AuthReducer extends ReducerWrapper<
         })
 
         const gas = result.balance?.find(
-          (it: any) => it.assethash === Config.app.DEFAULT_GASTOKEN_SCRIPTHASH
+          (it: any) => it.assethash === Env.GAS_CONTRACT_HASH
         )
 
         dispatch(
@@ -211,7 +212,7 @@ export class AuthReducer extends ReducerWrapper<
         const {client, session, accounts} = getState().auth
         const [address] = accounts?.[0].split('@') ?? []
 
-        const scriptHash = Config.app.DEFAULT_GASTOKEN_SCRIPTHASH
+        const scriptHash = Env.GAS_CONTRACT_HASH
         const method = 'transfer'
         const from = {type: 'Address', value: address}
         const to = {
@@ -227,6 +228,32 @@ export class AuthReducer extends ReducerWrapper<
           request: {
             method: 'invokefunction',
             params: [scriptHash, method, [from, to, value, data]],
+          },
+        })
+
+        return result as string
+      }
+    },
+
+    vote: (publicKey: string | null): AsyncAction<string> => {
+      return async (dispatch, getState) => {
+        const {client, session, accounts} = getState().auth
+        const [address] = accounts?.[0].split('@') ?? []
+
+        const scriptHash = Env.NEO_CONTRACT_HASH
+        const method = 'vote'
+        const account = {type: 'Address', value: address}
+        const voteTo = {
+          type: 'Address',
+          value: publicKey,
+        }
+
+        const result = await client?.request({
+          topic: session?.topic ?? '',
+          chainId: Config.app.DEFAULT_CHAIN_ID,
+          request: {
+            method: 'invokefunction',
+            params: [scriptHash, method, [account, voteTo]],
           },
         })
 

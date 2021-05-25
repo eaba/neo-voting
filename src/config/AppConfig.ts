@@ -3,8 +3,6 @@
  * Application Configuration
  */
 
-import {Env} from '~src/app/Env'
-
 /**
  * App Configuration
  */
@@ -13,10 +11,7 @@ export class AppConfig {
 
   readonly DEFAULT_LOGGER = 'debug'
 
-  readonly DEFAULT_CHAIN_ID = Env.DEFAULT_CHAIN_ID
-
-  readonly DEFAULT_GASTOKEN_SCRIPTHASH =
-    '0xd2a4cff31913016155e38e474a2c06d08be276cf'
+  readonly DEFAULT_CHAIN_ID = 'neo3:ihavenoidea'
 
   readonly DEFAULT_METHODS = [
     'getversion',
